@@ -9,6 +9,17 @@
   "author": "Shray Bansal",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^1.13.2"
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "jsx-loader": "^0.13.2",
+    "react-hot-loader": "^3.0.0-beta.4",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "dependencies": {
+    "babel-loader": "^6.2.5",
+    "react": "^15.3.2"
   }
 }
