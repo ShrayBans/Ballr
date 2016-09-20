@@ -1,0 +1,14 @@
+{
+  "name": "npmballr",
+  "version": "1.0.0",
+  "description": "NBA player stat comparison tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Shray Bansal",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.13.2"
+  }
+}
