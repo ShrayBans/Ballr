@@ -4,24 +4,21 @@
   "description": "NBA player stat comparison tool",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "build": "./node_modules/webpack/bin/webpack.js -p",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress --colors --inline"
   },
   "author": "Shray Bansal",
   "license": "ISC",
   "devDependencies": {
-    "css-loader": "^0.25.0",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "jsx-loader": "^0.13.2",
-    "react-hot-loader": "^3.0.0-beta.4",
-    "sass-loader": "^4.0.2",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
-  },
-  "dependencies": {
+    "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
-    "react": "^15.3.2"
-  }
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "dependencies": {}
 }

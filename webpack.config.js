@@ -1,31 +1,20 @@
-function getEntrySources(sources) {
-    if (process.env.NODE_ENV !== 'production') {
-        sources.push('webpack-dev-server/client?http://localhost:8080');
-        sources.push('webpack/hot/only-dev-server');
-    }
-
-    return sources;
-}
-
 module.exports = {
     entry: {
-        helloWorld: getEntrySources([
-            './src/app.js'
-        ])
+        main: './src/scripts/main.js'
     },
     output: {
-        path: __dirname + '/build',
-        publicPath: 'http://localhost:8080/',
-        filename: 'bundle.js'
+        filename: './dist/scripts/[name].js'
     },
+    devtool: 'source-map', 
     module: {
         loaders: [
             {
-              test: /\.css$/,
-              loaders: ['style', 'css']
-            },
-            { test: /\.js$/, loaders: ['react-hot', 'jsx', 'babel'], exclude: /node_modules/ },
-            { test: /\.scss$/, loaders: ['style', 'css', 'sass'] }
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel',
+                query: {
+                    presets: ['react', 'es2015']
+            }
         ]
     }
-};
+}
