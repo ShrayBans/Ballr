@@ -3,18 +3,23 @@
 const express = require('express');
 const app = express();
 const searchController = require('./scraper');
+const postToMongo = require('./postToMongo')
 // var linksToScrape = 2;
 
 // var paths = ['/', '/path1', '/path2']
 // first sample route
 
+app.get('/mongo', function(req, res){
+	res.json
+});
 
-app.get('/', function(req, res){
+app.get('/scrape', searchController, postToMongo, function(req, res){
 	// for (var i = 1; i <= 2; i++) {
 		// console.log(urlGenerator())
 		searchController(res, urlGenerator())
+
 	// }
-})
+});
 
 function urlGenerator(input){
 	if(!input) input = "Kevin Durant";
