@@ -5,9 +5,11 @@ const url = "http://www.si.com/nba/top-100-nba-players-2016";
 const cheerio = require('cheerio');
 const request = require('request');
 const rp = require('request-promise');
+const postToMongo = require('./postToMongo')
+
 var playerData = [];
 
-function searchController(url){
+function playerScraper(req, res, next){
 	var options = {
 		uri: url,
 		transform: function(body){
@@ -15,24 +17,26 @@ function searchController(url){
 		}
 	};
 
-	return rp(options);
+	return rp(options)
+		.then(function($){
+			var playerArr;
+			$('.title').each(function() {
+				playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
+				playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
+			});
+
+			return playerData;
+
+		})
+		.then(function(playerData) {
+			req.playerData = playerData;
+			console.log(playerData)
+			next();
+		})
+		.catch(function(err){
+			console.log(err);
+			next();
+		});
 }
 
-searchController(url)
-	.then(function($){
-		var playerArr;
-		$('.title').each(function() {
-			playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
-			playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
-		});
-
-		return playerData;
-
-	})
-	.then(function(playerData) {
-		console.log(playerData);
-	})
-	.catch(function(err){
-		console.log(err);
-	})
-
+module.exports = playerScraper;

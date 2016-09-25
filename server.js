@@ -2,23 +2,27 @@
 
 const express = require('express');
 const app = express();
-const searchController = require('./scraper');
+const bodyParser = require('body-parser');
+const path = require('path');
+// const playerData = require('./scraper');
+const playerScraper = require('./player-scraper');
 const postToMongo = require('./postToMongo')
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // var linksToScrape = 2;
 
 // var paths = ['/', '/path1', '/path2']
 // first sample route
 
 app.get('/mongo', function(req, res){
-	res.json()
+	res.send('SUP');
 });
 
-app.get('/scrape', searchController, postToMongo, function(req, res){
-	// for (var i = 1; i <= 2; i++) {
-		// console.log(urlGenerator())
-		searchController(res, urlGenerator())
+app.get('/playerlist', playerScraper, postToMongo.playerList, function(req, res){
 
-	// }
+	res.json(req.playerData);
+
 });
 
 function urlGenerator(input){
