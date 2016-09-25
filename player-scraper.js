@@ -15,20 +15,24 @@ function searchController(url){
 		}
 	};
 
-	rp(options)
-		.then(function($){
-			var playerArr;
-			$('.title').each(function() {
-				playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
-				playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
-			});
-
-		})
-		.catch(function(err){
-			console.log(err);
-		});
-
+	return rp(options);
 }
 
-searchController(url);
-console.log(playerData);
+searchController(url)
+	.then(function($){
+		var playerArr;
+		$('.title').each(function() {
+			playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
+			playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
+		});
+
+		return playerData;
+
+	})
+	.then(function(playerData) {
+		console.log(playerData);
+	})
+	.catch(function(err){
+		console.log(err);
+	})
+
