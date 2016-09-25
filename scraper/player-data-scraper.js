@@ -7,20 +7,49 @@ const rp = require('request-promise');
 var json = {};
 
 function playerData(req, res, next){ 
+
+	let playerUrl = urlGenerator(req.playerData[i].firstName, req.playerData[i].lastName);
+	eachPlayer()
+	setIntervalX(function () {
+	    console.log('suppppp')
+	}, 1000, 5);
+
+	setInterval(, 1000)
 	next();
 }
 
+function eachPlayer(url) {
+	var options = {
+		uri: url,
+		transform: function(body){
+			return cheerio.load(body)
+		}
+	};
 
+	rp(options)
+		.then
+}
+
+function setIntervalX(callback, delay, repetitions) {
+    var x = 0;
+    var intervalID = window.setInterval(function () {
+
+       callback();
+
+       if (++x === repetitions) {
+           window.clearInterval(intervalID);
+       }
+    }, delay);
+}
+
+function urlGenerator(first, last) {
+
+}
 
 // function playerData(res, url){
 // 	var playerUrl;
 
-// 	var options = {
-// 		uri: url,
-// 		transform: function(body){
-// 			return cheerio.load(body)
-// 		}
-// 	};
+
 
 // 	rp(options)
 // 		.then(function($){

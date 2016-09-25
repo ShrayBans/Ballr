@@ -45,12 +45,13 @@ app.get('/players', mongoMethods.retrievePlayers, function(req, res){
 	res.json(req.playerData);
 });
 
-app.get('/sup/:password', authenticateScraper, function(req, res){
+//mongoMethods.savePlayers
+app.get('/test/:first/:last', playerData , function(req, res){
 	res.send('nice');
 });
 
-app.get('/', authenticateScraper, function(req, res){
-	res.send('Please enter the correct password');
+app.get('/', function(req, res){
+	res.send('Home');
 });
 
 /**
