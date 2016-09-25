@@ -9,52 +9,57 @@ const request = require('request');
 const promisify = require('es6-promisify');
 const rp = require('request-promise');
 
-/**
-* @property {number} Delay for scraper in milliseconds 
-*/
-const scraperDelay = 20000;
+
 
 function playerData(req, res, next){ 
+	/**
+	* @property {number} Delay for scraper in milliseconds 
+	*/
+	const scraperDelay = 2500;
 
 	let times = 0;
 	let playerUrl, firstName, lastName;
+	let playerList = req.playerData;
+	let playerTemp;
 	let playerData = [];
 	const intervalID = setInterval(function () {
-		firstName = req.playerData[times].firstName;
-		lastName = req.playerData[times].lastName;
+		playerTemp = playerList.pop();
+		firstName = playerTemp.firstName;
+		lastName = playerTemp.lastName;
+		console.log(playerList)
 	  playerUrl = urlGenerator(firstName, lastName);
 	  times++;
     eachPlayer(playerUrl, firstName, lastName)
     	.then(function(data) {
     		playerData[times-1] = data;
-    		console.log(firstName, 'stored')
+    		console.log(firstName, 'stored', (times-1), playerList.length);
     	})
     	.then(function() {
-    		if (times === req.playerData.length) {
+    		if (playerList.length < 1) {
     				req.playerData = playerData;
     		    clearInterval(intervalID);
+    		    next();
     		}
     	})
     	.catch(function(err) {
-    		if (times === req.playerData.length) {
+    		if (playerList.length < 1) {
     				req.playerData = playerData;
     		    clearInterval(intervalID);
+    		    next();
     		}
 				console.error(err);
     		throw new Error(err);
     	});
 
 	}, scraperDelay);
-
-	next();
 }
 
 
 /** 
 * Promisified scraper that returns each individual player stats.
 *	.data, .attr, .prop, css selectors didn't work
-* @param {string} url of specific player website to scrape
-* @param {string} first, last names of player
+* @param {string} url - of specific player website to scrape
+* @param {string} first - last names of player
 * @return {Promise} returns a promise that can be used to get the data of each player once it's available
 */
 var eachPlayer = promisify(function (url, first, last, callback) {
@@ -89,7 +94,6 @@ var eachPlayer = promisify(function (url, first, last, callback) {
 			callback(err, null);
 		});
 });
-
 
 /**
 * @param {string} first - first name of player.
