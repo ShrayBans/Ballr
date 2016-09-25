@@ -1,0 +1,10 @@
+first_name: String,
+last_name: String,
+fg_percent: Number,
+ft_percent: Number,
+three_percent: Number,
+assists: Number,
+steals: Number,
+blocks: Number,
+turnovers: Number,
+points: Number
