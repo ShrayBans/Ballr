@@ -19,27 +19,12 @@ function searchController(url){
 		.then(function($){
 			var playerArr;
 			$('.title').each(function() {
-				playerArr = $(this).text().split('');
+				playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
+				playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
 			});
 
-				// var playerUrlArr = [];
-				// // console.log('HELLO' + $('#leaders').find('td[data-stat="player"]').text());
-				// $('#leaders').find('td[data-stat="player"]').each(function(){
-				// 	var playerExt = $(this).find('a').attr('href');
+			console.log(playerData);
 
-
-				// 	if(playerExt){
-				// 		var playerBegin = "http://www.pro-football-reference.com"
-				// 		var playerUrl = playerBegin + playerExt;
-				// 		playerUrlArr.push(playerUrl);
-				// 		// playerController(res, playerUrl);
-				// 	}
-
-				// });
-	   //  	for (var i = 0; i < 2; i++) {
-	   //  		setTimeout(playerController(res, playerUrlArr[i]), )
-	    		
-	   //  	};
 
 		})
 		.catch(function(err){
@@ -49,17 +34,3 @@ function searchController(url){
 }
 
 searchController(url);
-
-function playerFinder (res, url){
-
-  // change URL to any site that you want
-  // request(url, (error, response, html) => {
-  // let $ = cheerio.load(html);
-
-	var body = $('.article').first().text();
-	wordFinder(body);
-	 		
-
-	// });
-}
-
