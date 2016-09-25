@@ -29,6 +29,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "mongoose": "^4.6.1",
+    "pg": "^6.1.0",
     "request": "^2.75.0",
     "request-promise": "^4.1.1"
   }

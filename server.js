@@ -4,20 +4,50 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+
+const mongoose = require('mongoose');
+const mongoURI = 'mongodb://localhost/ballr';
+const db = mongoose.connect(mongoURI);
+
+
+// var pg = require('pg');
+// const table = require('./table.js');
+// var conString = process.env.ELEPHANTSQL_URL || "postgres://postgres:5432@localhost/postgres";
+
+// var client = new pg.Client(conString);
+// client.connect(function(err) {
+//   if(err) {
+//     return console.error('could not connect to postgres', err);
+//   }
+//   client.query(`CREATE TABLE nba_ballr (${table}) `, function(err, result) {
+//     if(err) {
+//       return console.error('error running query', err);
+//     }
+//     console.log(result);
+//   });
+// });
+
 // const playerData = require('./scraper');
 const playerScraper = require('./player-scraper');
 const postToMongo = require('./postToMongo')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+/**
+* @scrapes playerData using original list and adds to database 
+*
+**/
 app.get('/mongo', function(req, res){
 	res.send('SUP');
 });
 
+/**
+* @scrapes playerList and adds to database 
+*
+**/
 app.get('/playerlist', playerScraper, postToMongo.playerList, function(req, res){
-
 	res.json(req.playerData);
-
 });
 
 function urlGenerator(input){
