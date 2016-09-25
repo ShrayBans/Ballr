@@ -1,11 +1,24 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
+var webpack = require('webpack');
+
+function getDevTool() {
+    if (process.env.NODE_ENV !== 'production') {
+        return 'source-map'; //enables source map
+    }
+    
+    return false; 
+}
+
 module.exports = {
     entry: {
         main: './src/scripts/main.js'
     },
     output: {
-        filename: './dist/scripts/[name].js'
+      path: __dirname + '/dist/scripts/',
+      filename: 'bundle.js'
     },
-    devtool: 'source-map', 
+    devtool: getDevTool(),
     module: {
         loaders: [
             {
@@ -14,7 +27,13 @@ module.exports = {
                 loader: 'babel',
                 query: {
                     presets: ['react', 'es2015']
+                }
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
             }
-        ]
+        ],
+
     }
-}
+};
