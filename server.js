@@ -30,6 +30,7 @@ const mongoMethods = require('./scraper/mongoMethods')
 // const postToPG = require('./scraper/postToPG');
 
 
+const authenticateScraper = require('./scraper/authenticate-scraper');
 const playerData = require('./scraper/player-data-scraper');
 const playerScraper = require('./scraper/player-scraper');
 
@@ -44,11 +45,19 @@ app.get('/players', mongoMethods.retrievePlayers, function(req, res){
 	res.json(req.playerData);
 });
 
+app.get('/sup/:password', authenticateScraper, function(req, res){
+	res.send('nice');
+});
+
+app.get('/', authenticateScraper, function(req, res){
+	res.send('Please enter the correct password');
+});
+
 /**
 * @scrapes playerList and adds to database 
 *
 **/
-app.get('/scrape/:password', playerScraper, playerData, mongoMethods.savePlayers, function(req, res){
+app.get('/scrape/:password', authenticateScraper, playerScraper, playerData, mongoMethods.savePlayers, function(req, res){
 	res.json(req.playerData);
 });
 

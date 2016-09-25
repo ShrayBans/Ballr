@@ -5,7 +5,6 @@ const url = "http://www.si.com/nba/top-100-nba-players-2016";
 const cheerio = require('cheerio');
 const request = require('request');
 const rp = require('request-promise');
-const postToMongo = require('./postToMongo')
 
 var playerData = [];
 
