@@ -10,7 +10,7 @@ const postToMongo = require('./postToMongo')
 // first sample route
 
 app.get('/mongo', function(req, res){
-	res.json
+	res.json()
 });
 
 app.get('/scrape', searchController, postToMongo, function(req, res){
