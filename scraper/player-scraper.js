@@ -20,7 +20,7 @@ function playerScraper(req, res, next){
 		.then(function($){
 			var playerArr;
 			$('.title').each(function() {
-				playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
+				playerArr = $(this).text().replace(/[0-9.-]/g, '').split(' ');
 				playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
 			});
 
@@ -29,7 +29,6 @@ function playerScraper(req, res, next){
 		})
 		.then(function(playerData) {
 			req.playerData = playerData;
-			// console.log(playerData)
 			next();
 		})
 		.catch(function(err){

@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "cheerio": "^0.22.0",
+    "es6-promisify": "^4.1.0",
     "fs": "0.0.1-security",
     "mongoose": "^4.6.1",
     "pg": "^6.1.0",

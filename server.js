@@ -51,7 +51,7 @@ app.get('/test/:first/:last', playerData , function(req, res){
 	res.send('nice');
 });
 
-app.get('/', function(req, res){
+app.get('/', playerData, function(req, res){
 	res.send('Home');
 });
 

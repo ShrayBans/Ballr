@@ -6,35 +6,58 @@
 
 const cheerio = require('cheerio');
 const request = require('request');
-const Promise = require("bluebird");
+const promisify = require('es6-promisify');
 const rp = require('request-promise');
-var json = {};
 
 /**
 * @property {number} Delay for scraper in milliseconds 
 */
-const scraperDelay = 3000;
-const repetitions = 2;
+const scraperDelay = 20000;
 
 function playerData(req, res, next){ 
-	// console.log(urlGenerator(req.params.first, req.params.last));
-	// eachPlayer(playerUrl);
-	var times = 0;
-	let playerUrl;
-	var intervalID = setInterval(function () {
-	     playerUrl = urlGenerator(req.playerData[times].firstName, req.playerData[times].lastName);
-	    console.log(playerUrl);
 
-			if (++times === repetitions) {
-			    clearInterval(intervalID);
-			}
+	let times = 0;
+	let playerUrl, firstName, lastName;
+	let playerData = [];
+	const intervalID = setInterval(function () {
+		firstName = req.playerData[times].firstName;
+		lastName = req.playerData[times].lastName;
+	  playerUrl = urlGenerator(firstName, lastName);
+	  times++;
+    eachPlayer(playerUrl, firstName, lastName)
+    	.then(function(data) {
+    		playerData[times-1] = data;
+    		console.log(firstName, 'stored')
+    	})
+    	.then(function() {
+    		if (times === req.playerData.length) {
+    				req.playerData = playerData;
+    		    clearInterval(intervalID);
+    		}
+    	})
+    	.catch(function(err) {
+    		if (times === req.playerData.length) {
+    				req.playerData = playerData;
+    		    clearInterval(intervalID);
+    		}
+				console.error(err);
+    		throw new Error(err);
+    	});
 
 	}, scraperDelay);
 
 	next();
 }
 
-function eachPlayer(url) {
+
+/** 
+* Promisified scraper that returns each individual player stats.
+*	.data, .attr, .prop, css selectors didn't work
+* @param {string} url of specific player website to scrape
+* @param {string} first, last names of player
+* @return {Promise} returns a promise that can be used to get the data of each player once it's available
+*/
+var eachPlayer = promisify(function (url, first, last, callback) {
 	var options = {
 		uri: url,
 		transform: function(body){
@@ -42,42 +65,31 @@ function eachPlayer(url) {
 		}
 	};
 
+	var playerObj = {firstName: first, lastName: last};
+
 	rp(options)
 		.then(function($){
-			console.log()
-			var playerArr;
-			$('.title').each(function() {
-				playerArr = $(this).text().replace(/[0-9.]/g, '').split(' ');
-				playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
+			var table = $('#per_game').find('tfoot').find('tr').first().find('td');
+			table
+				.each(function(i, data) {
+				if(data.attribs["data-stat"]==='fg_pct') playerObj['fg_pct'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='fg3_pct') playerObj['fg3_pct'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='ft_pct') playerObj['ft_pct'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='trb_per_g') playerObj['reb'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='ast_per_g') playerObj['ast'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='pts_per_g') playerObj['pts'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='stl_per_g') playerObj['stl'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='blk_per_g') playerObj['blk'] = data.children[0].data;
+				else if(data.attribs["data-stat"]==='tov_per_g') playerObj['tov'] = data.children[0].data;
 			});
 
-			return playerData;
-
+			callback(null, playerObj);
 		})
-		.then(function(playerData) {
-			req.playerData = playerData;
-			console.log(playerData)
-			next();
-		})
-		.catch(function(err){
-			console.log(err);
-			next();
+		.catch(function(err) {
+			callback(err, null);
 		});
-}
+});
 
-function setIntervalX(callback, delay, repetitions) {
-    var x = 0;
-    var intervalID = setInterval(function () {
-
-       callback();
-
-       if (++x === repetitions) {
-           clearInterval(intervalID);
-       }
-    }, delay);
-}
-
-//http://www.basketball-reference.com/players/(first letter of last name)/(5 letters of lastname)+(2 letters of firstname)01.html
 
 /**
 * @param {string} first - first name of player.
