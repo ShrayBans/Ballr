@@ -7,8 +7,9 @@ postToMongo.playerList = function(req, res, next) {
 	next();
 };
 
-postToMongo.playerData = function() {
+postToMongo.playerData = function(req, res, next) {
 	
+	next()
 };
 
 module.exports = postToMongo;

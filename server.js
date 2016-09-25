@@ -10,11 +10,6 @@ const postToMongo = require('./postToMongo')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// var linksToScrape = 2;
-
-// var paths = ['/', '/path1', '/path2']
-// first sample route
-
 app.get('/mongo', function(req, res){
 	res.send('SUP');
 });
