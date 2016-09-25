@@ -23,9 +23,6 @@ function searchController(url){
 				playerData.push({firstName: playerArr[0], lastName: playerArr[1]});
 			});
 
-			console.log(playerData);
-
-
 		})
 		.catch(function(err){
 			console.log(err);
@@ -34,3 +31,4 @@ function searchController(url){
 }
 
 searchController(url);
+console.log(playerData);
