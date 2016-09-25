@@ -13,20 +13,20 @@ var json = {};
 /**
 * @property {number} Delay for scraper in milliseconds 
 */
-const scraperDelay = 5000;
-const repetitions = 5;
+const scraperDelay = 3000;
+const repetitions = 2;
 
 function playerData(req, res, next){ 
-	console.log(urlGenerator(req.params.first, req.params.last));
-	// let playerUrl = urlGenerator(req.playerData[i].firstName, req.playerData[i].lastName);
+	// console.log(urlGenerator(req.params.first, req.params.last));
 	// eachPlayer(playerUrl);
 	var times = 0;
-	setInterval(function () {
-	    
-	    console.log(times);
+	let playerUrl;
+	var intervalID = setInterval(function () {
+	     playerUrl = urlGenerator(req.playerData[times].firstName, req.playerData[times].lastName);
+	    console.log(playerUrl);
 
 			if (++times === repetitions) {
-			    clearInterval();
+			    clearInterval(intervalID);
 			}
 
 	}, scraperDelay);
@@ -85,8 +85,8 @@ function setIntervalX(callback, delay, repetitions) {
 * @return {string} Returns a generated url specific for www.basketball-reference.com
 */
 function urlGenerator(first, last) {
-	first = first.substring(0,2);
-	last = last.substring(0,5);
+	first = first.toLowerCase().substring(0,2);
+	last = last.toLowerCase().substring(0,5);
 	var lastInitial = last.substring(0,1);
 	return `http://www.basketball-reference.com/players/${lastInitial}/${last}${first}01.html`;
 }

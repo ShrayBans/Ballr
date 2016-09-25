@@ -47,6 +47,7 @@ app.get('/players', mongoMethods.retrievePlayers, function(req, res){
 
 //mongoMethods.savePlayers
 app.get('/test/:first/:last', playerData , function(req, res){
+	console.log('DONE SCRAPING!');
 	res.send('nice');
 });
 

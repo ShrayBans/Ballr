@@ -4,10 +4,10 @@ const Player = require('./playerlist-mg-model.js');
 const mongoMethods = {};
 
 mongoMethods.savePlayers = function(req, res, next) {
-	Player.create({}, (err, res) =>  {
+	// Player.create({}, (err, res) =>  {
 
-	})
-	console.log(req.playerData);
+	// })
+	// console.log(req.playerData);
 	next();
 };
 

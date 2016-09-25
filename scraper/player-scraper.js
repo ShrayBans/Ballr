@@ -29,11 +29,11 @@ function playerScraper(req, res, next){
 		})
 		.then(function(playerData) {
 			req.playerData = playerData;
-			console.log(playerData)
+			// console.log(playerData)
 			next();
 		})
 		.catch(function(err){
-			console.log(err);
+			console.error(err);
 			next();
 		});
 }
