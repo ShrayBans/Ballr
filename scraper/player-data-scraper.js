@@ -1,18 +1,35 @@
 'use strict';
-// var uselessWords = ['to', 'is', 'all', 'in', 'the', 'a', 'and', 'and', 'it', 'The', 'what', 'that', 'he', 'his', 'her', 'was', 'with', 'in']
+
+/**
+ * @fileoverview Scrapes individual player data using an interval to ensure no ip blacklisting.
+ */
+
 const cheerio = require('cheerio');
 const request = require('request');
 const Promise = require("bluebird");
 const rp = require('request-promise');
 var json = {};
 
-function playerData(req, res, next){ 
+/**
+* @property {number} Delay for scraper in milliseconds 
+*/
+const scraperDelay = 5000;
+const repetitions = 5;
 
+function playerData(req, res, next){ 
+	console.log(urlGenerator(req.params.first, req.params.last));
 	// let playerUrl = urlGenerator(req.playerData[i].firstName, req.playerData[i].lastName);
 	// eachPlayer(playerUrl);
-	setIntervalX(function () {
-	    console.log('suppppp')
-	}, 5000, 1);
+	var times = 0;
+	setInterval(function () {
+	    
+	    console.log(times);
+
+			if (++times === repetitions) {
+			    clearInterval();
+			}
+
+	}, scraperDelay);
 
 	next();
 }
@@ -50,18 +67,28 @@ function eachPlayer(url) {
 
 function setIntervalX(callback, delay, repetitions) {
     var x = 0;
-    var intervalID = window.setInterval(function () {
+    var intervalID = setInterval(function () {
 
        callback();
 
        if (++x === repetitions) {
-           window.clearInterval(intervalID);
+           clearInterval(intervalID);
        }
     }, delay);
 }
 
-function urlGenerator(first, last) {
+//http://www.basketball-reference.com/players/(first letter of last name)/(5 letters of lastname)+(2 letters of firstname)01.html
 
+/**
+* @param {string} first - first name of player.
+* @param {string} last - last name of player.
+* @return {string} Returns a generated url specific for www.basketball-reference.com
+*/
+function urlGenerator(first, last) {
+	first = first.substring(0,2);
+	last = last.substring(0,5);
+	var lastInitial = last.substring(0,1);
+	return `http://www.basketball-reference.com/players/${lastInitial}/${last}${first}01.html`;
 }
 
     module.exports = playerData;
