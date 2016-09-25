@@ -8,10 +8,11 @@ const path = require('path');
 const mongoose = require('mongoose');
 const mongoURI = 'mongodb://localhost/ballr';
 const db = mongoose.connect(mongoURI);
+const mongoMethods = require('./scraper/mongoMethods')
 
 
 // var pg = require('pg');
-// const table = require('./table.js');
+// const table = require('./scraper/pg-table.js');
 // var conString = process.env.ELEPHANTSQL_URL || "postgres://postgres:5432@localhost/postgres";
 
 // var client = new pg.Client(conString);
@@ -26,10 +27,11 @@ const db = mongoose.connect(mongoURI);
 //     console.log(result);
 //   });
 // });
+// const postToPG = require('./scraper/postToPG');
 
-// const playerData = require('./scraper');
-const playerScraper = require('./player-scraper');
-const postToMongo = require('./postToMongo')
+
+const playerData = require('./scraper/player-data-scraper');
+const playerScraper = require('./scraper/player-scraper');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -38,15 +40,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 * @scrapes playerData using original list and adds to database 
 *
 **/
-app.get('/mongo', function(req, res){
-	res.send('SUP');
+app.get('/players', mongoMethods.retrievePlayers, function(req, res){
+	res.json(req.playerData);
 });
 
 /**
 * @scrapes playerList and adds to database 
 *
 **/
-app.get('/playerlist', playerScraper, postToMongo.playerList, function(req, res){
+app.get('/scrape/:password', playerScraper, playerData, mongoMethods.savePlayers, function(req, res){
 	res.json(req.playerData);
 });
 
