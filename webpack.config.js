@@ -1,24 +1,18 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var path = require('path');
-var webpack = require('webpack');
-
-function getDevTool() {
-    if (process.env.NODE_ENV !== 'production') {
-        return 'source-map'; //enables source map
-    }
+// function getDevTool() {
+//     if (process.env.NODE_ENV !== 'production') {
+//         return 'source-map'; //enables source map
+//     }
     
-    return false; 
-}
+//     return false; 
+// }
 
 module.exports = {
-    entry: {
-        index: './app/index.js'
-    },
+    entry:'./app/index.js',
     output: {
-      path: __dirname + '/dist/scripts/',
+      path: __dirname,
+      publicPath: '/',
       filename: 'bundle.js'
     },
-    devtool: getDevTool(),
     module: {
         loaders: [
             {
@@ -26,14 +20,15 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel',
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: ['react', 'es2015', 'stage-2'], 
+                    plugins: ['transform-decorators-legacy', 'react-hot-loader/babel']
                 }
             },
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'sass']
             }
-        ],
+        ]
 
     }
 };

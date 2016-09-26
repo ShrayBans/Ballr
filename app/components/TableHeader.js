@@ -1,10 +1,9 @@
 import React from 'react';
 
-export default const TableHeader = () => {
+const TableHeader = () => {
 
-	render() {
 		return(
-			<div>
+			<thead>
 				<tr>
 					<th>Picture</th>
 					<th>Name</th>
@@ -17,7 +16,8 @@ export default const TableHeader = () => {
 					<th>TOV</th>
 					<th>PTS</th>
 				</tr>
-			</div>
+			</thead>
 		)
-	}
-}
+};
+
+export default TableHeader;

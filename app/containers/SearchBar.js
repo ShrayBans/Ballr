@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchHouse, getZip } from '../actions/index'
+import { fetchPlayers } from '../actions/api';
 
-class SearchBar extends Component {
+export default class SearchBar extends Component {
 	constructor(props){
 		super(props)
 		this.state = {letter: ''};
@@ -17,7 +15,7 @@ class SearchBar extends Component {
 
 	onFormSubmit(event){
 		event.preventDefault();
-		this.props.searchEnter(this.state.letter);
+		fetchPlayers(this.state.letter);
 		this.setState({letter: ''});
 	}
 
@@ -37,9 +35,3 @@ class SearchBar extends Component {
 			)
 	}
 }
-
-function MapDispatchToProps(dispatch) {
-	return bindActionCreators({fetchHouse, getZip}, dispatch)
-}
-
-export default connect(null, MapDispatchToProps)(SearchBar)

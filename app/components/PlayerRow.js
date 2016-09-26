@@ -1,23 +1,21 @@
 import React from 'react';
 
-export default const TableHeader = () => {
-
-	render() {
+const PlayerRow = (props) => {
+		const {pic, name, fg_pct, ft_pct, fg3_pct, ast, stl, blk, tov, pts} = props;
 		return(
-			<div>
 				<tr>
-					<th>Picture</th>
-					<th>Name</th>
-					<th>FG%</th>
-					<th>FT%</th>
-					<th>3PT%</th>
-					<th>AST</th>
-					<th>STL</th>
-					<th>BLK</th>
-					<th>TOV</th>
-					<th>PTS</th>
+					<td>{pic}</td>
+					<td>{name}</td>
+					<td>{fg_pct}</td>
+					<td>{ft_pct}</td>
+					<td>{fg3_pct}%</td>
+					<td>{ast}</td>
+					<td>{stl}</td>
+					<td>{blk}</td>
+					<td>{tov}</td>
+					<td>{pts}</td>
 				</tr>
-			</div>
 		)
-	}
 }
+
+export default PlayerRow;

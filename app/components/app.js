@@ -1,7 +1,8 @@
-import React from 'react';
-import PlayerTable from '../containers/PlayerTable.js'
+import React, {Component} from 'react';
+import PlayerTable from '../containers/PlayerTable.js';
+import SearchBar from '../containers/SearchBar.js';
 
-export default class App extends React.Component {
+export default class App extends Component {
 
 	render() {
 		return(
