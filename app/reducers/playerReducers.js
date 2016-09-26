@@ -1,4 +1,6 @@
-import {FETCH_PLAYERS, FETCH_PLAYERS_ERR, DELETE_PLAYER} from '../actions/api';
+import {FETCH_PLAYERS, FETCH_PLAYERS_ERR} from '../actions/api';
+import {DELETE_PLAYER} from '../actions/application';
+
 
 const initial_state = [];
 
@@ -7,8 +9,7 @@ const initial_state = [];
 export default function reducer(state= initial_state, action) {
 	switch(action.type) {
 		case FETCH_PLAYERS:
-			console.log('SOMETHING');
-			return [...state, action.payload];
+			return [...state, {...action.payload, winner:false}];
 		case FETCH_PLAYERS_ERR:
 			console.log('ERR', action.payload);
 			return state;

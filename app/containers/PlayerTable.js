@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TableHeader from '../components/TableHeader.js';
 import PlayerRow from '../components/PlayerRow.js';
+import CompareButton from '../components/CompareButton.js';
 import {deletePlayer} from '../actions/application';
 import {connect} from 'react-redux';
 let name;
@@ -13,6 +14,7 @@ let name;
 
 export default class PlayerTable extends Component {
 	pressX(i) {
+		console.log(i)
 		this.props.dispatch(deletePlayer(i));
 	}
 
@@ -21,7 +23,8 @@ export default class PlayerTable extends Component {
 			name = item.firstName+ " " +item.lastName;
 			return <PlayerRow 
 				key={i}
-
+				index={i}
+				pic={item.pic}
 				name={name} 
 				fg_pct={item.fg_pct}
 				ft_pct={item.ft_pct}
@@ -33,7 +36,9 @@ export default class PlayerTable extends Component {
 				pts={item.pts}
 				pressX = {this.pressX.bind(this)}
 				/>
-		}) 
+		});
+
+
 
 		return(
 			<div>
@@ -43,6 +48,7 @@ export default class PlayerTable extends Component {
 						{playerArr}	
 					</tbody>
 				</table>
+				<CompareButton length={playerArr.length} />
 			</div>
 		)
 	}

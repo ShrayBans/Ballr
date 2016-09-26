@@ -11,6 +11,7 @@ export function incrementVal(name){
 }
 
 export function deletePlayer(index){
+	console.log(index)
 	return {
 		type: DELETE_PLAYER,
 		payload: index

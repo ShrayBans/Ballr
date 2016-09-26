@@ -5,7 +5,6 @@ const TableHeader = () => {
 		return(
 			<thead>
 				<tr>
-					<th className="picRow"></th>
 					<th>Name</th>
 					<th>FG%</th>
 					<th>FT%</th>
