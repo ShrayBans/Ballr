@@ -1,4 +1,12 @@
-#example {
-    color: green;
-    background: blue;
+.header {
+
+	h1 {
+		display: inline-block;
+		font-size: 100px;
+		font-family: 'Quicksand', sans-serif;
+	}
+	img {
+		height: 100px;
+		display: inline-block;
+	}
 }

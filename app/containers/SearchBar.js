@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { fetchPlayers } from '../actions/api';
+import {connect} from 'react-redux';
+
+@connect((store) => {
+	return {};
+})
 
 export default class SearchBar extends Component {
 	constructor(props){
@@ -15,7 +20,7 @@ export default class SearchBar extends Component {
 
 	onFormSubmit(event){
 		event.preventDefault();
-		fetchPlayers(this.state.letter);
+		this.props.dispatch(fetchPlayers(this.state.letter));
 		this.setState({letter: ''});
 	}
 

@@ -32,7 +32,7 @@ export default class PlayerTable extends Component {
 
 		return(
 			<div>
-				<table className="table table-inverse">
+				<table className="table table-inverse table-bordered">
 					<TableHeader />
 					<tbody>
 						{playerArr}	

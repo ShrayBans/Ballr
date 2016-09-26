@@ -7,6 +7,10 @@ export default class App extends Component {
 	render() {
 		return(
 			<div>
+				<div className="header">
+					<img src="../../stephencurry.jpg"/>
+					<h1>Ballr</h1>
+				</div>
 				<SearchBar />
 				<PlayerTable />
 			</div>

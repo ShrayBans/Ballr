@@ -1,26 +1,27 @@
 import axios from 'axios'
 
 export const FETCH_PLAYERS = 'FETCH_PLAYERS';
+export const FETCH_PLAYERS_ERR = 'FETCH_PLAYERS_ERR';
 
 export function fetchPlayers(name){
 	var nameArr = name.split(' ');
 	console.log(nameArr);
 	var request = axios.get(`http://localhost:3000/player/${nameArr[0]}/${nameArr[1]}`);
-	request.then(function(data) {
-		console.log(data)
-	});
+
 	//redux-thunk returns a function rather than a regular object
 	return (dispatch) => {
 		console.log('inside thunk')
-		request.then(({data}) => {
-			console.log('DATA', data)
+		request.then((response) => {
 			dispatch({
 				type: FETCH_PLAYERS,
-				payload: data
-			})
+				payload: response.data
+			});
 		})
 		.catch((err) => {
-			console.error('sucks', err)
+			dispatch({
+				type: FETCH_PLAYERS_ERR,
+				payload: err
+			})
 		});
 	};
 }
