@@ -41,14 +41,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 * @scrapes playerData using original list and adds to database 
 *
 **/
-app.get('/players', mongoMethods.retrievePlayers, function(req, res){
-	res.json(req.playerData);
-});
+// app.get('/players', mongoMethods, function(req, res){
+// 	res.json(req.playerData);
+// });
 
 //mongoMethods.savePlayers
-app.get('/test/:first/:last', playerData , function(req, res){
-	console.log('DONE SCRAPING!');
-	res.send('nice');
+app.get('/player/:first/:last', mongoMethods.retrievePlayer , function(req, res){
+	res.json(req.player);
 });
 
 app.get('/', playerData, function(req, res){
