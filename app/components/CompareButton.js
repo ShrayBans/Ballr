@@ -4,7 +4,11 @@ const CompareButton = (props) => {
 	if (props.length > 0) {
 		return (
 			<div className="center">
-				<button className="btn btn-success btn-lg">Compare Players</button>
+				<button 
+					onClick={props.pressCompare}
+					className="btn btn-success btn-lg">
+						Compare Players
+				</button>
 			</div>
 		)
 	}
