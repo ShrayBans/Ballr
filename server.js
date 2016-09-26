@@ -36,27 +36,18 @@ const playerScraper = require('./scraper/player-scraper');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-/**
-* @scrapes playerData using original list and adds to database 
-*
-**/
-// app.get('/players', mongoMethods, function(req, res){
-// 	res.json(req.playerData);
-// });
-
 //mongoMethods.savePlayers
 app.get('/player/:first/:last', mongoMethods.retrievePlayer , function(req, res){
 	res.json(req.player);
 });
 
-app.get('/', playerData, function(req, res){
-	res.send('Home');
+app.get('/', function(req, res){
+	res.sendfile(path.join(__dirname, '/index.html'));
 });
 
 /**
-* @scrapes playerList and adds to database 
-*
+* Scrapes playerList and adds to database
+* Needs password authentication to scrape
 **/
 app.get('/scrape/:password', authenticateScraper, playerScraper, playerData, mongoMethods.savePlayers, function(req, res){
 	res.json(req.playerData);

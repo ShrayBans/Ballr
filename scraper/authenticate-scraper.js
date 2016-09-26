@@ -5,10 +5,13 @@ require.extensions['.txt'] = function (module, filename) {
 
 const password = require('../password.txt');
 
+/**
+* Authenticates the scraper needing param to be the same as the password.txt file
+**/
 function authenticateScraper(req, res, next) {
 
 	if(password !== req.params.password) {
-		res.end('Please enter correct password for scraper <3');
+		res.end('Please enter correct password for scraper.');
 	}
 	else next();
 }

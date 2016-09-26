@@ -12,7 +12,7 @@ function getDevTool() {
 
 module.exports = {
     entry: {
-        main: './src/scripts/main.js'
+        index: './app/index.js'
     },
     output: {
       path: __dirname + '/dist/scripts/',
