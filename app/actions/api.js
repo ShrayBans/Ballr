@@ -1,23 +1,19 @@
-// import redux-thank
-export const FETCH_HOUSE = 'FETCH_HOUSE';
-export const GET_ZIP = 'GET_ZIP';
+import axios from 'axios'
 
+export const FETCH_PLAYERS = 'FETCH_PLAYERS';
 
-export function fetchHouse(){
+export function fetchPlayers(name){
+	var nameArr = name.split(' ');
 
-	var promise = axios.get('http://localhost:3000/json');
+	var request = axios.get(`http://localhost:3000/player/${nameArr[0]}/${nameArr[1]}`);
 
-	return {
-		type: FETCH_HOUSE,
-		payload: promise
-	};
-}
-
-export function getZip(zip){
-	// console.log('STORE: ', store.getState())
-	return {
-		type: GET_ZIP,
-		data: store.getState(),
-		payload: zip
+	//redux-thunk returns a function rather than a regular object
+	return (dispatch) => {
+		request.then(({data}) => {
+			dispatch({
+				type: FETCH_PLAYERS,
+				payload: data
+			})
+		});
 	};
 }
