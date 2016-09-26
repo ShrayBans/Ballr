@@ -10,6 +10,9 @@ export function incrementVal(name){
 	};
 }
 
-export function deletePlayer(){
-
+export function deletePlayer(index){
+	return {
+		type: DELETE_PLAYER,
+		payload: index
+	}
 }

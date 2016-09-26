@@ -12,8 +12,11 @@ export default function reducer(state= initial_state, action) {
 		case FETCH_PLAYERS_ERR:
 			console.log('ERR', action.payload);
 			return state;
-		// case DELETE_PLAYER:
-		// 	return {...state, players: }
+		case DELETE_PLAYER:
+			return [
+		    ...state.slice(0, action.payload),
+		    ...state.slice(action.payload + 1)
+				]
 		default:
 			return state;
 	}

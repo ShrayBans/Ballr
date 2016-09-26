@@ -29,7 +29,7 @@ export default class SearchBar extends Component {
 			<form onSubmit = {this.onFormSubmit} className = 'input-group searchBar'>
 				<input 
 					placeholder='Enter an NBA Player Name'
-					className = 'form-control'
+					className = 'form-control searchBar'
 					value={this.state.letter}
 					onChange = {this.handleChange}
 				/>

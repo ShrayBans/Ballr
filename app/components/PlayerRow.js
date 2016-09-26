@@ -14,6 +14,8 @@ const PlayerRow = (props) => {
 					<td>{blk}</td>
 					<td>{tov}</td>
 					<td>{pts}</td>
+					<td onClick={this.props.pressX}>
+					</td>
 				</tr>
 		)
 }

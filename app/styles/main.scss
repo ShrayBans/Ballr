@@ -1,12 +1,28 @@
 .header {
-
+	text-align: center;
 	h1 {
 		display: inline-block;
-		font-size: 100px;
+		font-size: 120px;
 		font-family: 'Quicksand', sans-serif;
 	}
 	img {
+		vertical-align: text-bottom;
 		height: 100px;
+		width: 120px;
 		display: inline-block;
 	}
+}
+
+.searchBar {
+	margin: auto;
+	width: 70%;
+	margin-bottom: 20px;
+}
+
+.center {
+	text-align: center;
+}
+
+.picRow {
+	width: 150px;
 }

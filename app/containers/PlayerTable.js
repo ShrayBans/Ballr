@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import TableHeader from '../components/TableHeader.js'
-import PlayerRow from '../components/PlayerRow.js'
+import TableHeader from '../components/TableHeader.js';
+import PlayerRow from '../components/PlayerRow.js';
+import {deletePlayer} from '../actions/application';
 import {connect} from 'react-redux';
 let name;
 
@@ -11,6 +12,9 @@ let name;
 })
 
 export default class PlayerTable extends Component {
+	pressX(i) {
+		this.props.dispatch(deletePlayer(i));
+	}
 
 	render() {
 		var playerArr = this.props.players.map((item, i) => {
@@ -27,12 +31,13 @@ export default class PlayerTable extends Component {
 				blk={item.blk}
 				tov={item.tov}
 				pts={item.pts}
+				pressX = {this.pressX.bind(this)}
 				/>
 		}) 
 
 		return(
 			<div>
-				<table className="table table-inverse table-bordered">
+				<table className="table table-inverse table-hover table-condensed table-bordered">
 					<TableHeader />
 					<tbody>
 						{playerArr}	
