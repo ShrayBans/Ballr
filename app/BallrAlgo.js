@@ -5,7 +5,7 @@ export default function BallrAlgo(playerArr) {
 	var tempScore = 0;
 	var maxScore = 0;
 	for (var i = 0; i < playerArr.length; i++) {
-		if(playerArr[i].firstName === 'Stephen') return i;
+		if(playerArr[i].firstName === 'Stephen') return [i, 'Steph Level'];
 		tempScore = BallrScore(
 			playerArr[i].fg_pct,
 			playerArr[i].ft_pct,
@@ -16,15 +16,13 @@ export default function BallrAlgo(playerArr) {
 			playerArr[i].pts,
 			playerArr[i].stl
 			 );
-		console.log(tempScore);
 
 		if (tempScore > maxScore) {
 			index = i;
 			maxScore = tempScore;
 		}
 	}
-	console.log(index)
-	return index;
+	return [index, maxScore];
 }
 
 function BallrScore(fg, ft, fg3, blk, ast, tov, pts, stl) {

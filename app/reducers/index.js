@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import players from './winnerReducer';
-import winner from './playerReducers';
+import winner from './winnerReducer';
+import players from './playerReducers';
 import button from './buttonReducer';
 
 export default combineReducers({

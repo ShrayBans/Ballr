@@ -1,5 +1,5 @@
 import {FETCH_PLAYERS, FETCH_PLAYERS_ERR} from '../actions/api';
-import {DELETE_PLAYER, COMPARE_PLAYERS} from '../actions/application';
+import {DELETE_PLAYER, COMPARE_PLAYERS, RESET_PLAYERS} from '../actions/application';
 
 
 const initial_state = [];
@@ -21,9 +21,11 @@ export default function reducer(state= initial_state, action) {
 		case COMPARE_PLAYERS:
 			return [
 		    ...state.slice(0, action.payload),
-		    {...state[action.payload], winner: true},
+		    {...state[action.payload.index], winner: true},
 		    ...state.slice(action.payload + 1)
-				]
+				];
+		case RESET_PLAYERS:
+			return initial_state;
 		default:
 			return state;
 	}
