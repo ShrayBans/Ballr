@@ -9,6 +9,12 @@ const CompareButton = (props) => {
 					className="btn btn-success btn-lg">
 						Compare Players
 				</button>
+				<button
+					className="btn btn-danger btn-lg resetButton"
+					onClick={props.pressReset}
+					>
+					Reset Players
+				</button>
 			</div>
 		)
 	}

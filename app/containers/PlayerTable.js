@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TableHeader from '../components/TableHeader.js';
 import PlayerRow from '../components/PlayerRow.js';
 import CompareButton from '../components/CompareButton.js';
-import {deletePlayer, comparePlayers} from '../actions/application';
+import {deletePlayer, comparePlayers, resetPlayers} from '../actions/application';
 import {connect} from 'react-redux';
 let name;
 
@@ -19,6 +19,10 @@ export default class PlayerTable extends Component {
 
 	pressCompare() {
 		this.props.dispatch(comparePlayers(this.props.players));
+	}
+
+	pressReset() {
+		this.props.dispatch(resetPlayers());
 	}
 
 	render() {
@@ -50,7 +54,7 @@ export default class PlayerTable extends Component {
 						{playerArr}	
 					</tbody>
 				</table>
-				<CompareButton pressCompare= {this.pressCompare.bind(this)} length={playerArr.length} />
+				<CompareButton pressCompare= {this.pressCompare.bind(this)} pressReset={this.pressReset.bind(this)} length={playerArr.length} />
 			</div>
 		)
 	}

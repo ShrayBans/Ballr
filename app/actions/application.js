@@ -37,4 +37,6 @@ export function comparePlayers(playerArr){
 	}
 }
 
-export function resetPlayer
+export function resetPlayers() {
+	return {type: RESET_PLAYERS}
+}
