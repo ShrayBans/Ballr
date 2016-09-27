@@ -4,15 +4,16 @@ Ballr is an NBA comparison tool that takes the top 100 basketball players stats 
 
 ##Usage
 
-Currently Ballr is in the process of being deployed, but for now please enjoy it through 
-`npm install` to install necessary dependencies
-`nodemon server.js' to start the server
+Currently Ballr is in the process of being deployed, but for now please enjoy it through:
 
-Then visit `localhost:3000/` to access the Ballr.
+- `npm install` to install necessary dependencies
+- `nodemon server.js' to start the server
+
+- Then visit `localhost:3000/` to access the Ballr.
 
 ##Tech Stack
 - **React** (using Redux as a global state container)
 - Experimented with both **PostgreSQL** and **MongoDB** (can be interchanged)
-- Node (using the Cheerio library) to scrape the basketball data
+- **Node** (using the Cheerio library) to scrape the basketball data
 
 ![Ballr](./Ballr.png)
