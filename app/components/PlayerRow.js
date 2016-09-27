@@ -7,8 +7,8 @@ const PlayerRow = (props) => {
 		return(
 				<tr className={rowClass}>
 					<td>{name}</td>
-					<td>{fg_pct}</td>
-					<td>{ft_pct}</td>
+					<td>{fg_pct}%</td>
+					<td>{ft_pct}%</td>
 					<td>{fg3_pct}%</td>
 					<td>{ast}</td>
 					<td>{stl}</td>

@@ -9,6 +9,7 @@ const initial_state = [];
 export default function reducer(state= initial_state, action) {
 	switch(action.type) {
 		case FETCH_PLAYERS:
+			if(!action.payload) return state;
 			return [...state, {...action.payload, winner:false}];
 		case FETCH_PLAYERS_ERR:
 			console.log('ERR', action.payload);
