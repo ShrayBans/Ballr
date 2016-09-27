@@ -9,8 +9,8 @@
 module.exports = {
     entry:'./app/index.js',
     output: {
-      path: __dirname,
-      publicPath: '/',
+      path: __dirname +'/build',
+      publicPath: '/build/',
       filename: 'bundle.js'
     },
     devtool: 'eval-source-map',
