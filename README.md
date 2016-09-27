@@ -4,12 +4,7 @@ Ballr is an NBA comparison tool that takes the top 100 basketball players stats 
 
 ##Usage
 
-Currently Ballr is in the process of being deployed, but for now please enjoy it through:
-
-- `npm install` to install necessary dependencies
-- `nodemon server.js` to start the server
-
-- Then visit `localhost:3000/` to access the Ballr.
+Currently Ballr is [DEPLOYED](https://nba-ballr.herokuapp.com/), but for now please enjoy it through:
 
 <i>Be sure to try **STEPHEN CURRY** for a special Ballr score</i>
 

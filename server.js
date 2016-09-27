@@ -41,15 +41,15 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static(__dirname+ '/public/public'));
+
 //mongoMethods.savePlayers
 app.get('/player/:first/:last', mongoMethods.retrievePlayer , function(req, res){
 	res.json(req.player);
 });
 
-app.use(express.static('build'));
-
 app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname, '/index.html'));
+	res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 /**

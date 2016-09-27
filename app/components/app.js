@@ -9,7 +9,7 @@ export default class App extends Component {
 		return(
 			<div>
 				<div className="header">
-					<img src="../../stephencurry.jpg"/>
+					<img src="../images/stephencurry.jpg"/>
 					<h1>Ballr</h1>
 				</div>
 				<WinnerMessage />

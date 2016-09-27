@@ -5,7 +5,7 @@ export const FETCH_PLAYERS_ERR = 'FETCH_PLAYERS_ERR';
 
 export function fetchPlayers(name){
 	var nameArr = name.split(' ');
-	var request = axios.get(`http://localhost:3000/player/${nameArr[0]}/${nameArr[1]}`);
+	var request = axios.get(`/player/${nameArr[0]}/${nameArr[1]}`);
 
 	//redux-thunk returns a function rather than a regular object
 	return (dispatch) => {
