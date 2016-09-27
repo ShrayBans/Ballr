@@ -20,9 +20,9 @@ export default function reducer(state= initial_state, action) {
 				]
 		case COMPARE_PLAYERS:
 			return [
-		    ...state.slice(0, action.payload),
+		    ...state.slice(0, action.payload.index),
 		    {...state[action.payload.index], winner: true},
-		    ...state.slice(action.payload + 1)
+		    ...state.slice(action.payload.index + 1)
 				];
 		case RESET_PLAYERS:
 			return initial_state;
