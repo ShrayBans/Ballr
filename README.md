@@ -11,7 +11,7 @@ Currently Ballr is in the process of being deployed, but for now please enjoy it
 
 - Then visit `localhost:3000/` to access the Ballr.
 
-<i>BE SURE TO TRY **STEPHEN CURRY** FOR A SPECIAL BALLR SCORE</i>
+<i>Be sure to try **STEPHEN CURRY** for a special Ballr score</i>
 
 ##Tech Stack
 - **React** (using Redux as a global state container)
