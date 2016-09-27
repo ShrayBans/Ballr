@@ -14,13 +14,11 @@ let name;
 
 export default class PlayerTable extends Component {
 	pressX(i) {
-		console.log(i)
 		this.props.dispatch(deletePlayer(i));
 	}
 
 	pressCompare() {
-		console.log('COMPARED')
-		this.props.dispatch(comparePlayers())
+		this.props.dispatch(comparePlayers(this.props.players));
 	}
 
 	render() {
@@ -46,7 +44,7 @@ export default class PlayerTable extends Component {
 
 		return(
 			<div>
-				<table className="table table-inverse table-hover table-condensed table-bordered">
+				<table className="table table-inverse table-condensed table-bordered">
 					<TableHeader />
 					<tbody>
 						{playerArr}	
