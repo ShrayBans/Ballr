@@ -15,6 +15,9 @@ export default class App extends Component {
 				<WinnerMessage />
 				<SearchBar />
 				<PlayerTable />
+				<div className="github">
+					Check out the <a href="https://github.com/ShrayBans/Ballr">Ballr GitHub Repo</a>!
+				</div>
 			</div>
 		)
 	}
