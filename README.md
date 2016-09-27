@@ -10,7 +10,8 @@ Currently Ballr is in the process of being deployed, but for now please enjoy it
 - `nodemon server.js` to start the server
 
 - Then visit `localhost:3000/` to access the Ballr.
-*BE SURE TO TRY **STEPHEN CURRY** FOR A SPECIAL BALLR SCORE*
+
+<i>BE SURE TO TRY **STEPHEN CURRY** FOR A SPECIAL BALLR SCORE</i>
 
 ##Tech Stack
 - **React** (using Redux as a global state container)
